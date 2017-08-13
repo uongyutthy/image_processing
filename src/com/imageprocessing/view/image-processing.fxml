@@ -29,7 +29,7 @@
                   <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="btnFind" onAction="#alert" mnemonicParsing="false" prefHeight="27.0" prefWidth="140.0" text="Find" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
+                  <Button fx:id="btnFindImage" onAction="#findImage" mnemonicParsing="false" prefHeight="27.0" prefWidth="140.0" text="Find" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
                   <Label text="Find Image:" GridPane.rowIndex="1" />
                   <TextField fx:id="txtInputImage" prefHeight="27.0" prefWidth="308.0" promptText="Please Browse To Your Image" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Button fx:id="btnProcess" mnemonicParsing="false" prefHeight="27.0" prefWidth="140.0" text="Process Image" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
@@ -56,7 +56,7 @@
                <children>
                   <ImageView fx:id="imgOriginal" fitHeight="235.0" fitWidth="275.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <ImageView fx:id="imgEnhanced" fitHeight="235.0" fitWidth="275.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Label text="Original Image" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Label fx:id="lblImgOriginal" text="Original Image" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <Label text="Enhanced Image" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
