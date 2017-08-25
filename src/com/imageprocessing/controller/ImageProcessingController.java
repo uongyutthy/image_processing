@@ -30,7 +30,7 @@ public class ImageProcessingController implements Initializable {
 
 
     public void findImage(ActionEvent actionEvent) {
-        txtInputImage.setText(BrowseImage.browseImage(imgOriginal));;
+        txtInputImage.setText(BrowseImage.browseImage(imgOriginal).getFilename());;
 
     }
 
