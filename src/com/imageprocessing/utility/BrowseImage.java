@@ -18,6 +18,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
 import java.awt.image.DataBufferByte;
+import java.awt.image.Raster;
 import java.io.File;
 import java.io.IOException;
 
@@ -33,59 +34,34 @@ public class BrowseImage {
         fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
         File file = fileChooser.showOpenDialog(null);
-        String fileName = "";
-        GrayScaleImage grayIm = new GrayScaleImage();
-        if (file!= null) {
-            fileName = file.getName();
-            imageName = fileName;
-            try{
-                ImagePlus imp = IJ.openImage(file.getPath());
-                imp.show();
-                BufferedImage bufferedImage = ImageIO.read(file);
 
+        GrayScaleImage grayIm = null;
+
+        if (file!= null) {
+            imageName = file.getName();
+            try{
+                BufferedImage bufferedImage = ImageIO.read(file);
                 Image image = SwingFXUtils.toFXImage(bufferedImage, null);
                 imageView.setImage(image);
+
+
                 ImagePlus imgPlus = new ImagePlus();
                 imgPlus.setImage(bufferedImage);
-                imgPlus.setDisplayMode(CompositeImage.GRAY8);
+                ImageProcessor imp = imgPlus.getProcessor();
 
-
-              //  PixelReader px = image.getPixelReader();
-
-                byte[] pixels = ((DataBufferByte) bufferedImage.getRaster().getDataBuffer()).getData();
-
-
-                //ImageConverter ic = new ImageConverter(imgPlus);
-                //ic.convertToGray8();
-
-
-                /*
-                ImageProcessor imgProcessor = imgPlus.getProcessor();
-
-                BufferedImage bufferedImages = imgProcessor.getBufferedImage();
-
-                if(!imgProcessor.isGrayscale()){
-                    for(int y=0;y<bufferedImages.getHeight();y++)
-                    {
-                        for(int x=0;x<bufferedImages.getWidth();x++)
-                        {
-                            Color color = new Color(bufferedImages.getRGB(x, y));
-                            int grayLevel = (color.getRed() + color.getGreen() + color.getBlue()) / 3;
-                            int r = grayLevel;
-                            int g = grayLevel;
-                            int b = grayLevel;
-                            int rgb = (r<<16)  | (g<<8)  | b;
-                            bufferedImage.setRGB(x, y, rgb);
-                        }
-                    }
+                if(!imp.isGrayscale()){
+                    System.out.println("test");
+                    imgPlus.setDisplayMode(CompositeImage.GRAY8);
+                    bufferedImage = imgPlus.getBufferedImage();
                 }
 
+                int width = bufferedImage.getWidth();
+                int height = bufferedImage.getHeight();
 
-                ImagePlus grayImg = new ImagePlus("gray", bufferedImage); */
+                BufferedImageConverter bic = new BufferedImageConverter(bufferedImage, width, height);
+                grayIm = new GrayScaleImage(bic.getByteArray(), imageName,width, height);
                 FileSaver fs = new FileSaver(imgPlus);
-                fs.saveAsJpeg("src/com/imageprocessing/images/grayscale/" + fileName);
-                grayIm.setFilename(fileName);
-                grayIm.setGrayScaleImagePlus(imgPlus);
+                fs.saveAsJpeg("src/com/imageprocessing/images/grayscale/" + imageName);
 
             } catch (IOException ex) {
                 ex.printStackTrace();
