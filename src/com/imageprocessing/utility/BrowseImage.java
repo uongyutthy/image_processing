@@ -1,12 +1,11 @@
 package com.imageprocessing.utility;
 
+import com.imageprocessing.LogarithmTransformation;
+import com.imageprocessing.NegativeImage;
 import ij.CompositeImage;
-import ij.IJ;
 import ij.ImagePlus;
-import ij.process.ByteProcessor;
 import ij.io.FileSaver;
 import ij.process.ImageProcessor;
-import javafx.scene.image.PixelReader;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,11 +13,7 @@ import javafx.stage.FileChooser;
 import com.imageprocessing.GrayScaleImage;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBuffer;
-import java.awt.image.DataBufferByte;
-import java.awt.image.Raster;
 import java.io.File;
 import java.io.IOException;
 
@@ -68,6 +63,13 @@ public class BrowseImage {
             }
 
         }
+
+        NegativeImage ni = new NegativeImage(grayIm);
+        int[][] test = ni.getEnhancedByteArray();
+
+        LogarithmTransformation lt = new LogarithmTransformation(grayIm);
+        int[][] test2 = lt.getEnhancedByteArray();
+
         return grayIm;
     }
 

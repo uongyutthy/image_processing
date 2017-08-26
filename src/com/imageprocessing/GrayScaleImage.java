@@ -3,6 +3,7 @@ package com.imageprocessing;
 public class GrayScaleImage {
     protected String filename = null;
     protected int[][] byteArray = null;
+    protected int[][] enhancedByteArray = (int[][])null;
     protected int width = 0;
     protected int height = 0;
 
@@ -44,4 +45,13 @@ public class GrayScaleImage {
     public void setHeight(int height) {
         this.height = height;
     }
+
+    public int[][] getEnhancedByteArray() {
+        if(this.enhancedByteArray == null){
+            this.enhance();
+        }
+        return this.enhancedByteArray;
+    }
+
+    protected void enhance() {}
 }
