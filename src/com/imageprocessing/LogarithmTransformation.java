@@ -20,5 +20,4 @@ public class LogarithmTransformation extends GrayScaleImage{
             }
         }
     }
-
 }

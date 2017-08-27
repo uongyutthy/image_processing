@@ -1,5 +1,6 @@
 package com.imageprocessing.utility;
 
+import com.imageprocessing.GammaTransformation;
 import com.imageprocessing.LogarithmTransformation;
 import com.imageprocessing.NegativeImage;
 import ij.CompositeImage;
@@ -45,7 +46,6 @@ public class BrowseImage {
                 ImageProcessor imp = imgPlus.getProcessor();
 
                 if(!imp.isGrayscale()){
-                    System.out.println("test");
                     imgPlus.setDisplayMode(CompositeImage.GRAY8);
                     bufferedImage = imgPlus.getBufferedImage();
                 }
@@ -64,11 +64,10 @@ public class BrowseImage {
 
         }
 
-        NegativeImage ni = new NegativeImage(grayIm);
+        GammaTransformation ni = new GammaTransformation(grayIm);
         int[][] test = ni.getEnhancedByteArray();
 
-        LogarithmTransformation lt = new LogarithmTransformation(grayIm);
-        int[][] test2 = lt.getEnhancedByteArray();
+
 
         return grayIm;
     }
