@@ -64,8 +64,6 @@ public class BrowseImage {
 
         }
 
-        GammaTransformation ni = new GammaTransformation(grayIm);
-        int[][] test = ni.getEnhancedByteArray();
 
 
 

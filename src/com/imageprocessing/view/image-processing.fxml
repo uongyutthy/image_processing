@@ -32,7 +32,7 @@
                   <Button fx:id="btnFindImage" onAction="#findImage" mnemonicParsing="false" prefHeight="27.0" prefWidth="140.0" text="Find" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
                   <Label text="Find Image:" GridPane.rowIndex="1" />
                   <TextField fx:id="txtInputImage" prefHeight="27.0" prefWidth="308.0" promptText="Please Browse To Your Image" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button fx:id="btnProcess" mnemonicParsing="false" prefHeight="27.0" prefWidth="140.0" text="Process Image" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Button fx:id="btnProcess" onAction="#processImage" mnemonicParsing="false" prefHeight="27.0" prefWidth="140.0" text="Process Image" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                   <Label text="Technique:" GridPane.rowIndex="3" />
                   <ComboBox fx:id="cmbTechnique" prefHeight="27.0" prefWidth="317.0" promptText="Please Select Technique" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>

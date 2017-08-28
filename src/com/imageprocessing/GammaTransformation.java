@@ -3,7 +3,7 @@ package com.imageprocessing;
 public class GammaTransformation extends GrayScaleImage {
 
     public static final int C = 1;
-    public static final float GAMMA = 3.0f;
+    public static float GAMMA = 3.0f;
 
     public GammaTransformation(int[][] byteArray, String filename, int width, int height) {
         super(byteArray, filename, width, height);
