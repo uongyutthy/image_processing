@@ -17,10 +17,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -50,16 +47,30 @@ public class ImageProcessingController implements Initializable {
     @FXML
     private ImageView imgEnhanced = null;
 
+    @FXML
+    private TextField txtGamma    = null;
+
 
     public void findImage(ActionEvent actionEvent) {
-        txtInputImage.setText(BrowseImage.browseImage(imgOriginal).getFilename());;
+        GrayScaleImage img = BrowseImage.browseImage(imgOriginal);
+        if(img != null) {
+            txtInputImage.setText(img.getFilename());
+        }
 
+    }
+
+    public void enableGama(){
+        if(cmbTechnique.getValue().getKey() == 1 || cmbTechnique.getValue().getKey() == 2){
+            txtGamma.setEditable(false);
+        }else{
+            txtGamma.setEditable(true);
+        }
     }
 
 
     public void processImage(ActionEvent actionEvent){
         // Check if Controls are Empty
-        if(cmbTechnique.getSelectionModel().isEmpty() && txtInputImage != null){
+        if(!cmbTechnique.getSelectionModel().isEmpty() && txtInputImage != null){
 
             int[][] enhancedByteArray = null;
 
@@ -90,10 +101,16 @@ public class ImageProcessingController implements Initializable {
 
             // Gamma Transformation
             }else if(cmbTechnique.getValue().getKey() == 3){
-                GammaTransformation.GAMMA = 3.0f;
-                GammaTransformation ni = new GammaTransformation(grayIm);
-                ni.enhance();
-                enhancedByteArray = ni.getEnhancedByteArray();
+                if(isNumeric(txtGamma.getText())) {
+                    float gamma = Float.valueOf(txtGamma.getText());
+                    GammaTransformation.GAMMA = gamma;
+                    GammaTransformation ni = new GammaTransformation(grayIm);
+                    ni.enhance();
+                    enhancedByteArray = ni.getEnhancedByteArray();
+                }else{
+                    PopUpMsg.popupMsg("Alert","Please Fill In Gamma Value as Numberic", Alert.AlertType.INFORMATION);
+                    return;
+                }
             }
 
             // Cover ByteArray of Image to BufferedImage
@@ -110,15 +127,16 @@ public class ImageProcessingController implements Initializable {
             f.setFileFilter(new FileNameExtensionFilter("jpeg", "jpeg"));
             f.showSaveDialog(null);
 
-            // Save file
-            FileSaver fs = new FileSaver(imgPlus);
-            fs.saveAsJpeg(f.getSelectedFile() + "\\" + BrowseImage.imageName);
-            fs.saveAsJpeg("src/com/imageprocessing/images/converted/" + BrowseImage.imageName);
+            if(f.getSelectedFile() != null) {
+                // Save file
+                FileSaver fs = new FileSaver(newImgPlus);
+                fs.saveAsJpeg(f.getSelectedFile() + "\\" + BrowseImage.imageName);
+                fs.saveAsJpeg("src/com/imageprocessing/images/converted/" + BrowseImage.imageName);
 
-            // View Image to ImageViewer
-            Image image = SwingFXUtils.toFXImage(newBufferedImage, null);
-            imgEnhanced.setImage(image);
-
+                // View Image to ImageViewer
+                Image image = SwingFXUtils.toFXImage(newBufferedImage, null);
+                imgEnhanced.setImage(image);
+            }
 
         }else {
             PopUpMsg.popupMsg("Alert","Please Choose Techniques And Browse Image to Convert", Alert.AlertType.INFORMATION);
@@ -134,6 +152,8 @@ public class ImageProcessingController implements Initializable {
         this.initComboBox();
         // display image in image view by default
         BrowseImage.showImage(imgOriginal, "browse-image.png");
+        txtInputImage.setEditable(false);
+        txtGamma.setEditable(false);
     }
 
 
@@ -147,6 +167,11 @@ public class ImageProcessingController implements Initializable {
 
         cmbTechnique.getItems().addAll(options);
     }
+
+    private boolean isNumeric(String s) {
+        return s != null && s.matches("[-+]?\\d*\\.?\\d+");
+    }
+
 }
 
 

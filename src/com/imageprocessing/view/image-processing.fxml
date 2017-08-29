@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.imageprocessing.controller.ImageProcessingController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imageprocessing.controller.ImageProcessingController">
    <top>
       <Pane prefWidth="600.0">
          <children>
@@ -29,12 +29,17 @@
                   <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="btnFindImage" onAction="#findImage" mnemonicParsing="false" prefHeight="27.0" prefWidth="140.0" text="Find" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
+                  <Button fx:id="btnFindImage" mnemonicParsing="false" onAction="#findImage" prefHeight="27.0" prefWidth="140.0" text="Find" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <Label text="Find Image:" GridPane.rowIndex="1" />
                   <TextField fx:id="txtInputImage" prefHeight="27.0" prefWidth="308.0" promptText="Please Browse To Your Image" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button fx:id="btnProcess" onAction="#processImage" mnemonicParsing="false" prefHeight="27.0" prefWidth="140.0" text="Process Image" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Button fx:id="btnProcess" mnemonicParsing="false" onAction="#processImage" prefHeight="27.0" prefWidth="140.0" text="Process Image" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                   <Label text="Technique:" GridPane.rowIndex="3" />
-                  <ComboBox fx:id="cmbTechnique" prefHeight="27.0" prefWidth="317.0" promptText="Please Select Technique" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <ComboBox fx:id="cmbTechnique" prefHeight="26.0" prefWidth="267.0" promptText="Please Select Technique" onAction="#enableGama" />
+                        <TextField fx:id="txtGamma" prefHeight="27.0" prefWidth="200.0" promptText="Gamma" />
+                     </children>
+                  </HBox>
                </children>
             </GridPane>
          </children>
