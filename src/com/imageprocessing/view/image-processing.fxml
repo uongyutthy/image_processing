@@ -36,7 +36,7 @@
                   <Label text="Technique:" GridPane.rowIndex="3" />
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <ComboBox fx:id="cmbTechnique" prefHeight="26.0" prefWidth="267.0" promptText="Please Select Technique" onAction="#enableGama" />
+                        <ComboBox fx:id="cmbTechnique" onAction="#enableGama" prefHeight="26.0" prefWidth="267.0" promptText="Please Select Technique" />
                         <TextField fx:id="txtGamma" prefHeight="27.0" prefWidth="200.0" promptText="Gamma" />
                      </children>
                   </HBox>
@@ -60,7 +60,7 @@
               </rowConstraints>
                <children>
                   <ImageView fx:id="imgOriginal" fitHeight="235.0" fitWidth="275.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <ImageView fx:id="imgEnhanced" fitHeight="235.0" fitWidth="275.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <ImageView fx:id="imgEnhanced" fitHeight="235.0" fitWidth="275.0" onMouseClicked="#previewEnhancedImage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Label fx:id="lblImgOriginal" text="Original Image" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <Label text="Enhanced Image" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                </children>

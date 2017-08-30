@@ -15,12 +15,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -28,6 +35,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -42,13 +50,14 @@ public class ImageProcessingController implements Initializable {
     public TextField txtInputImage = null;
 
     @FXML
-    private ImageView imgOriginal = null;
+    public ImageView imgOriginal = null;
 
     @FXML
-    private ImageView imgEnhanced = null;
+    public ImageView imgEnhanced = null;
 
     @FXML
-    private TextField txtGamma    = null;
+    public TextField txtGamma    = null;
+
 
 
     public void findImage(ActionEvent actionEvent) {
@@ -121,22 +130,13 @@ public class ImageProcessingController implements Initializable {
             ImagePlus newImgPlus = new ImagePlus();
             newImgPlus.setImage(newBufferedImage);
 
-            // Open Location to save file
-            JFileChooser f = new JFileChooser();
-            f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            f.setFileFilter(new FileNameExtensionFilter("jpeg", "jpeg"));
-            f.showSaveDialog(null);
+            // Save file
+            FileSaver fs = new FileSaver(newImgPlus);
+            fs.saveAsJpeg("src/com/imageprocessing/images/converted/" + BrowseImage.imageName);
 
-            if(f.getSelectedFile() != null) {
-                // Save file
-                FileSaver fs = new FileSaver(newImgPlus);
-                fs.saveAsJpeg(f.getSelectedFile() + "\\" + BrowseImage.imageName);
-                fs.saveAsJpeg("src/com/imageprocessing/images/converted/" + BrowseImage.imageName);
-
-                // View Image to ImageViewer
-                Image image = SwingFXUtils.toFXImage(newBufferedImage, null);
-                imgEnhanced.setImage(image);
-            }
+            // View Image to ImageViewer
+            Image image = SwingFXUtils.toFXImage(newBufferedImage, null);
+            imgEnhanced.setImage(image);
 
         }else {
             PopUpMsg.popupMsg("Alert","Please Choose Techniques And Browse Image to Convert", Alert.AlertType.INFORMATION);
@@ -144,6 +144,22 @@ public class ImageProcessingController implements Initializable {
         }
 
 
+    }
+
+    public void previewEnhancedImage(){
+
+        if(null!= imgEnhanced.getImage()) {
+            Parent root;
+            try {
+                root = FXMLLoader.load(getClass().getResource("/src/com/imageprocessing/view/show-image.fxml"));
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root, 575, 455));
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
