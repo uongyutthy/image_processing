@@ -15,25 +15,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -84,7 +77,7 @@ public class ImageProcessingController implements Initializable {
             int[][] enhancedByteArray = null;
 
             // Get File that has been uploaded
-            File file = new File("src/com/imageprocessing/images/grayscale/" + BrowseImage.imageName); //image file path
+            File file = new File("images/grayscale/" + BrowseImage.imageName); //image file path
             ImagePlus imgPlus = new ImagePlus(file.getPath());
             ImageProcessor imp = imgPlus.getProcessor();
 
@@ -132,7 +125,7 @@ public class ImageProcessingController implements Initializable {
 
             // Save file
             FileSaver fs = new FileSaver(newImgPlus);
-            fs.saveAsJpeg("src/com/imageprocessing/images/converted/" + BrowseImage.imageName);
+            fs.saveAsJpeg("images/converted/" + BrowseImage.imageName);
 
             // View Image to ImageViewer
             Image image = SwingFXUtils.toFXImage(newBufferedImage, null);
@@ -151,7 +144,7 @@ public class ImageProcessingController implements Initializable {
         if(null!= imgEnhanced.getImage()) {
             Parent root;
             try {
-                root = FXMLLoader.load(getClass().getResource("/src/com/imageprocessing/view/show-image.fxml"));
+                root = FXMLLoader.load(getClass().getClassLoader().getResource("resources/view/show-image.fxml"));
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root, 575, 455));
                 stage.show();

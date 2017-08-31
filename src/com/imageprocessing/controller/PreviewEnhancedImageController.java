@@ -23,7 +23,7 @@ public class PreviewEnhancedImageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Image image = new Image("/src/com/imageprocessing/images/converted/" + BrowseImage.imageName);
+        Image image = new Image("images/converted/" + BrowseImage.imageName);
         previewImage.setImage(image);
     }
 
@@ -34,7 +34,7 @@ public class PreviewEnhancedImageController implements Initializable {
         f.setFileFilter(new FileNameExtensionFilter("jpeg", "jpeg"));
         f.showSaveDialog(null);
 
-        File file = new File("src/com/imageprocessing/images/converted/" + BrowseImage.imageName); //image file path
+        File file = new File("images/converted/" + BrowseImage.imageName); //image file path
         ImagePlus imgPlus = new ImagePlus(file.getPath());
 
         if(f.getSelectedFile() != null) {

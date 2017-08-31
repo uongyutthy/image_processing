@@ -56,7 +56,7 @@ public class BrowseImage {
                 BufferedImageConverter bic = new BufferedImageConverter(bufferedImage, width, height);
                 grayIm = new GrayScaleImage(bic.getByteArray(), imageName,width, height);
                 FileSaver fs = new FileSaver(imgPlus);
-                fs.saveAsJpeg("src/com/imageprocessing/images/grayscale/" + imageName);
+                fs.saveAsJpeg("images/grayscale/" + imageName);
 
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -68,7 +68,7 @@ public class BrowseImage {
     }
 
     public static void showImage(ImageView imageView, String fileName) {
-        Image image = new Image("/com/imageprocessing/images/" + fileName);
+        Image image = new Image("images/" + fileName);
         imageView.setImage(image);
     }
 
