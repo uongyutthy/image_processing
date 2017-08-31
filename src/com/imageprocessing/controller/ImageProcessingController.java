@@ -51,7 +51,7 @@ public class ImageProcessingController implements Initializable {
     @FXML
     public TextField txtGamma    = null;
 
-
+    public static BufferedImage newBufferedImage = null;
 
     public void findImage(ActionEvent actionEvent) {
         GrayScaleImage img = BrowseImage.browseImage(imgOriginal);
@@ -117,15 +117,7 @@ public class ImageProcessingController implements Initializable {
 
             // Cover ByteArray of Image to BufferedImage
             BufferedImageConverter newBic = new BufferedImageConverter(enhancedByteArray, width, height);
-            BufferedImage newBufferedImage = newBic.getBufferedImage();
-
-            // Set Buffered Image to ImagePlace In Order To Save File Image
-            ImagePlus newImgPlus = new ImagePlus();
-            newImgPlus.setImage(newBufferedImage);
-
-            // Save file
-            FileSaver fs = new FileSaver(newImgPlus);
-            fs.saveAsJpeg("images/converted/" + BrowseImage.imageName);
+            newBufferedImage = newBic.getBufferedImage();
 
             // View Image to ImageViewer
             Image image = SwingFXUtils.toFXImage(newBufferedImage, null);
