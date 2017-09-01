@@ -100,7 +100,6 @@ public class ImageProcessingController implements Initializable {
                 logImag.enhance();
                 enhancedByteArray = logImag.getEnhancedByteArray();
 
-
             // Gamma Transformation
             }else if(cmbTechnique.getValue().getKey() == 3){
                 if(isNumeric(txtGamma.getText())) {

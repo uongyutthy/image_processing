@@ -1,7 +1,7 @@
 package com.imageprocessing;
 
 public class LogarithmTransformation extends GrayScaleImage{
-    public static final int C = 1;
+    public static final double C = (255/(Math.log(1+255)));
 
     public LogarithmTransformation(int[][] byteArray, String filename, int width, int height) {
         super(byteArray, filename, width, height);
@@ -16,7 +16,7 @@ public class LogarithmTransformation extends GrayScaleImage{
         this.enhancedByteArray = new int[this.height][this.width];
         for (int x = 0; x < this.getHeight(); x++) {
             for (int y = 0; y < this.getWidth(); y++) {
-                this.enhancedByteArray[x][y] = (int) (C * Math.round(Math.log(1 + this.byteArray[x][y])));
+                this.enhancedByteArray[x][y] = (int) ( C * (Math.log(1 + this.byteArray[x][y])));
             }
         }
     }
