@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imageprocessing.controller.ImageProcessingController">
+   <top>
+      <Pane prefWidth="600.0">
+         <children>
+            <GridPane prefHeight="100.0" prefWidth="600.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="99.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="298.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="175.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="12.0" minHeight="7.0" prefHeight="7.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="btnFindImage" mnemonicParsing="false" onAction="#findImage" prefHeight="27.0" prefWidth="140.0" text="Find" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Label text="Find Image:" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtInputImage" prefHeight="27.0" prefWidth="308.0" promptText="Please Browse To Your Image" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button fx:id="btnProcess" mnemonicParsing="false" onAction="#processImage" prefHeight="27.0" prefWidth="140.0" text="Process Image" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Label text="Technique:" GridPane.rowIndex="3" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <ComboBox fx:id="cmbTechnique" onAction="#enableGama" prefHeight="26.0" prefWidth="267.0" promptText="Please Select Technique" />
+                        <TextField fx:id="txtGamma" prefHeight="27.0" prefWidth="200.0" promptText="Gamma" />
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+         </children>
+      </Pane>
+   </top>
+   <center>
+      <Pane prefHeight="300.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane layoutX="24.0" layoutY="28.0" prefHeight="256.0" prefWidth="565.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="280.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="4.0" prefWidth="10.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="277.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="224.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="112.0" minHeight="0.0" prefHeight="19.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ImageView fx:id="imgOriginal" fitHeight="235.0" fitWidth="275.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <ImageView fx:id="imgEnhanced" fitHeight="235.0" fitWidth="275.0" onMouseClicked="#previewEnhancedImage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label fx:id="lblImgOriginal" text="Original Image" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Label text="Enhanced Image" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+               </children>
+            </GridPane>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
