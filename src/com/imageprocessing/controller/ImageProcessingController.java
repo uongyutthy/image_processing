@@ -9,7 +9,6 @@ import com.imageprocessing.utility.BufferedImageConverter;
 import com.imageprocessing.utility.KeyValueComboBox;
 import com.imageprocessing.utility.PopUpMsg;
 import ij.ImagePlus;
-import ij.io.FileSaver;
 import ij.process.ImageProcessor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -152,6 +151,8 @@ public class ImageProcessingController implements Initializable {
         this.initComboBox();
         // display image in image view by default
         BrowseImage.showImage(imgOriginal, "browse-image.png");
+        //Image image = new Image("/images/browse-image.png");
+        //imgOriginal.setImage(image);
         txtInputImage.setEditable(false);
         txtGamma.setEditable(false);
     }

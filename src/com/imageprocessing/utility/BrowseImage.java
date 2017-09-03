@@ -1,8 +1,5 @@
 package com.imageprocessing.utility;
 
-import com.imageprocessing.GammaTransformation;
-import com.imageprocessing.LogarithmTransformation;
-import com.imageprocessing.NegativeImage;
 import ij.CompositeImage;
 import ij.ImagePlus;
 import ij.io.FileSaver;
@@ -68,7 +65,7 @@ public class BrowseImage {
     }
 
     public static void showImage(ImageView imageView, String fileName) {
-        Image image = new Image("images/" + fileName);
+        Image image = new Image("images/browse-image.png");
         imageView.setImage(image);
     }
 
